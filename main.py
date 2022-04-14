@@ -6,7 +6,7 @@ from sklearn import model_selection
 
 
 mlp = MLPClassifier(random_state = 12, max_iter = 300, hidden_layer_sizes = 300)
-pipe = Pipeline([('scaler', MinMaxScaler()), ('mlp', mlp)])
-pipe.fit(training_data, training_targets)
-score = pipe.score(test_data, test_targets)
-print(score)
+pipe = Pipeline(steps=[('scaler', MinMaxScaler()),
+                ('mlp',
+                 MLPClassifier(activation='logistic', hidden_layer_sizes=500,
+                               max_iter=400, random_state=12))])
